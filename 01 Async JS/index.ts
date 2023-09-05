@@ -1,3 +1,4 @@
+//* Callback
 function boilWater(clb: TimerHandler): void {
   console.log("Gotowanie wody...");
   setTimeout(clb, 1000);
@@ -7,7 +8,7 @@ function makeTea(clb: TimerHandler): void {
   setTimeout(clb, 2000);
 }
 function waitingForGoodTemperature(clb: TimerHandler): void {
-  console.log("Czekam na odpowiednia temperature...");
+  console.log("Czekam na odpowiednią temperaturę...");
   setTimeout(clb, 500);
 }
 
@@ -20,3 +21,20 @@ boilWater(() => {
     });
   });
 });
+
+//* Promise
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (true) {
+      resolve("Wszystko Ok!");
+    }
+    reject(new Error("Nie che mię pracować!"));
+  }, 5000);
+});
+promise
+  .then((res) => {
+    console.log("Zadanie skończone", res);
+  })
+  .catch((err) => {
+    console.error("Coś poszło nie tak...", err);
+  });
