@@ -62,6 +62,11 @@ console.log("date1 === date2:", date1 === date2); // Expected output: false
 // @ts-ignore
 console.log("date1 - date2:", date1 - date2); // Expected output: 0
 
+// Error constructor
+const x = Error("I was created using a function call!");
+const y = new Error('I was constructed via the "new" keyword!');
+console.log({ x, y }, typeof x, typeof y);
+
 const student = {
   name: "Bob",
   score: 80,
