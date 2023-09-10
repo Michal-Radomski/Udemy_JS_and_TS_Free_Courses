@@ -23,6 +23,17 @@
 // age = 31; // Pointing to new address
 // console.log(`age = ${age}  age1 = ${age1}`);
 
+// String constructor
+const a = new String("Hello world"); // a === "Hello world" is false
+const b = String("Hello world"); // b === "Hello world" is true
+console.log("a instanceof String:", a instanceof String); // is true
+// @ts-ignore
+console.log("b instanceof String:", b instanceof String); // is false
+console.log("typeof a:", typeof a); // "object"
+console.log("typeof b:", typeof b); // "string"
+const c = "Hello world";
+console.log("b===c:", b === c);
+
 //* Reference Types [Array, Object and Function]
 // let info = {
 //   Name: "Abc",
@@ -38,6 +49,8 @@ let obj1 = new Object() as { myProperty: string } | null;
 let obj2 = obj1;
 obj1!.myProperty = "All the power is with in you.";
 console.log("obj2.myProperty:", obj2!.myProperty);
+obj1!.myProperty = "Test";
+console.log({ obj1, obj2 });
 obj1 = null;
 obj2 = null;
 console.log({ obj1, obj2 });
