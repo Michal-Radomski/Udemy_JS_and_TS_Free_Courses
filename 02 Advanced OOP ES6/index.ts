@@ -23,16 +23,16 @@
 // age = 31; // Pointing to new address
 // console.log(`age = ${age}  age1 = ${age1}`);
 
-// String constructor
-const a = new String("Hello world"); // a === "Hello world" is false
-const b = String("Hello world"); // b === "Hello world" is true
-console.log("a instanceof String:", a instanceof String); // is true
-// @ts-ignore
-console.log("b instanceof String:", b instanceof String); // is false
-console.log("typeof a:", typeof a); // "object"
-console.log("typeof b:", typeof b); // "string"
-const c = "Hello world";
-console.log("b===c:", b === c);
+//* String constructor
+// const a = new String("Hello world"); // a === "Hello world" is false
+// const b = String("Hello world"); // b === "Hello world" is true
+// console.log("a instanceof String:", a instanceof String); // is true
+// // @ts-ignore
+// console.log("b instanceof String:", b instanceof String); // is false
+// console.log("typeof a:", typeof a); // "object"
+// console.log("typeof b:", typeof b); // "string"
+// const c = "Hello world";
+// console.log("b===c:", b === c);
 
 //@ Reference Types [Array, Object and Function]
 // let info = {
@@ -64,18 +64,18 @@ console.log("b===c:", b === c);
 // console.log("regEx:", regEx, typeof regEx);
 // console.log("regEx1:", regEx1, typeof regEx1);
 
-// // Function constructor
+// //* Function constructor
 // const sum = new Function("a", "b", "return a + b");
 // console.log("sum(2, 6):", sum(2, 6)); // Expected output: 8
 
-// // Date constructor
+// //* Date constructor
 // const date1 = new Date("December 17, 1995 03:24:00"); // Sun Dec 17 1995 03:24:00 GMT...
 // const date2 = new Date("1995-12-17T03:24:00"); // Sun Dec 17 1995 03:24:00 GMT...
 // console.log("date1 === date2:", date1 === date2); // Expected output: false
 // // @ts-ignore
 // console.log("date1 - date2:", date1 - date2); // Expected output: 0
 
-// // Error constructor
+// //* Error constructor
 // const x = Error("I was created using a function call!");
 // const y = new Error('I was constructed via the "new" keyword!');
 // console.log({ x, y }, typeof x, typeof y);
@@ -249,3 +249,34 @@ console.log("b===c:", b === c);
 //   name: "Iphone",
 // };
 // console.log("Object.isExtensible(product):", Object.isExtensible(product));
+
+//@ Objects
+const course1 = {
+  name: "JavaScript fundamentals", //[[Put]]
+} as { name: string; description?: string };
+
+const course2 = new Object() as { name: string };
+course2.name = "ReactJS"; //[[Put]]
+course1.name = "End to End Java Project"; //[[Set]]
+course1.description = "Master Java Project Development"; //[[Put]]
+console.log({ course1, course2 });
+
+delete course1.description; //[[Delete]]
+console.log("description" in course1);
+console.log("toString" in course1);
+console.log(course1.hasOwnProperty("toString"));
+
+for (let eachProperty in course1) {
+  console.log({ eachProperty });
+  console.log(course1[eachProperty as keyof typeof course1]);
+}
+
+const allProperties = Object.keys(course1);
+console.log({ allProperties });
+
+for (let i = 0; i < allProperties.length; i++) {
+  console.log(allProperties[i]);
+  console.log(course1[allProperties[i] as keyof typeof course1]);
+}
+console.log(course1.propertyIsEnumerable("name"));
+console.log(allProperties.propertyIsEnumerable("length"));
