@@ -34,6 +34,23 @@
 // info1.Age = 14; // Change the Age of original object
 // console.log(`Name : ${info.Name} Age : ${info.Age}`);
 
+let obj1 = new Object() as { myProperty: string } | null;
+let obj2 = obj1;
+obj1!.myProperty = "All the power is with in you.";
+console.log("obj2.myProperty:", obj2!.myProperty);
+obj1 = null;
+obj2 = null;
+console.log({ obj1, obj2 });
+
+const products = new Array();
+const date = new Date();
+const error = new Error("Something went wrong");
+console.log({ products, date, error });
+const regEx = new RegExp("\\d+");
+const regEx1 = /\d+/ as RegExp;
+console.log("regEx:", regEx, typeof regEx);
+console.log("regEx1:", regEx1, typeof regEx1);
+
 // Function constructor
 const sum = new Function("a", "b", "return a + b");
 console.log("sum(2, 6):", sum(2, 6)); // Expected output: 8
@@ -66,9 +83,6 @@ function hello(name: string) {
 console.log("hello('Michal'):", hello("Michal"));
 const myFunc = new Function("name", "return 'Hello '+name");
 console.log('myFunc("Michal"):', myFunc("Michal"));
-
-const regEx = /\d+/ as RegExp;
-console.log("regEx:", regEx, typeof regEx);
 
 console.log("student instanceof Object):", student instanceof Object);
 console.log("studentNames instanceof Array:", studentNames instanceof Array);
