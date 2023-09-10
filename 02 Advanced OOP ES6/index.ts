@@ -128,26 +128,124 @@ console.log("b===c:", b === c);
 // console.log({ str1_1, str2_1 }, typeof str1_1, typeof str2_1);
 
 //@ Functions
-function evenOrOdd(num: number) {
-  console.log(arguments[0], arguments);
-  console.log(arguments.length);
-  console.log(evenOrOdd.length);
-  if (num % 2 == 0) {
-    return "even";
-  } else {
-    return "odd";
-  }
-}
-const e = evenOrOdd;
-console.log(e(10));
-console.log("typeof e:", typeof e);
+//* Hoisting
+// console.log("evenOrOdd(2):", evenOrOdd(2));
 
-const evenOrOdd2 = function (num: number) {
-  if (num % 2 == 0) {
-    return "even";
-  } else {
-    return "odd";
-  }
-};
-console.log(evenOrOdd2(5));
-console.log("typeof evenOrOdd2:", typeof evenOrOdd2);
+// function evenOrOdd(num: number) {
+//   console.log(arguments[0], arguments);
+//   console.log(arguments.length);
+//   console.log(evenOrOdd.length);
+//   if (num % 2 == 0) {
+//     return "even";
+//   } else {
+//     return "odd";
+//   }
+// }
+// const e = evenOrOdd;
+// console.log(e(10));
+// console.log("typeof e:", typeof e);
+
+// const evenOrOdd2 = function (num: number) {
+//   if (num % 2 == 0) {
+//     return "even";
+//   } else {
+//     return "odd";
+//   }
+// };
+// console.log(evenOrOdd2(5));
+// console.log("typeof evenOrOdd2:", typeof evenOrOdd2);
+
+// const studentIds = [30, 10, 20, 5, 100];
+// studentIds.sort(function (num1, num2) {
+//   return num1 - num2;
+// });
+// console.log({ studentIds });
+
+// function product(nums: number[]) {
+//   let result = 1;
+//   for (let i = 0; i < nums.length; i++) {
+//     result *= nums[i];
+//   }
+//   return result;
+// }
+
+// console.log(product([3, 4, 5]));
+// console.log(product([9, 8]));
+// console.log(product([10]));
+
+// const student = {
+//   id: 1,
+//   name: "Bob",
+//   display: function () {
+//     console.log("this:", this);
+//     console.log(this.id, this.name);
+//   },
+// };
+// student.display();
+
+//* Call
+// function Product(this: any, name: string, price: number) {
+//   this.name = name;
+//   this.price = price;
+// }
+
+// function Food(this: any, name: string, price: number) {
+//   Product.call(this, name, price);
+//   this.category = "food";
+// }
+// console.log(new (Food as any)("cheese", 5).name); // Expected output: "cheese"
+
+//* Apply
+// const numbers = [5, 6, 2, 3, 7];
+// const max = Math.max.apply(null, numbers);
+// console.log({ max }); // Expected output: 7
+// const min = Math.min.apply(null, numbers);
+// console.log({ min }); // Expected output: 2
+
+//* Bind
+// const _module = {
+//   x: 42,
+//   getX: function () {
+//     return this.x;
+//   },
+// };
+
+// const unboundGetX = _module.getX;
+// console.log(unboundGetX()); // The function gets invoked at the global scope -> Expected output: undefined
+// const boundGetX = unboundGetX.bind(_module);
+// console.log(boundGetX()); // Expected output: 42
+
+// function displayDetails(this: any, testscore: number, testscore2: number) {
+//   console.log(this.id);
+//   console.log(this.name);
+//   console.log(testscore);
+//   console.log(testscore2);
+// }
+
+// const student1 = {
+//   id: 1,
+//   name: "Bob",
+// };
+
+// const student2 = {
+//   id: 2,
+//   name: "John",
+// };
+// // console.log("student1, 10,10:", student1, 10, 10);
+// // console.log("student2, 20,20:", student2, 20, 20);
+
+// displayDetails.call(student1, 10, 10);
+// displayDetails.call(student2, 20, 20);
+// displayDetails.apply(student1, [10, 20]);
+// displayDetails.apply(student2, [20, 30]);
+
+// const displayForStudent1 = displayDetails.bind(student1);
+// displayForStudent1(10, 10);
+
+// const displayForStudent2 = displayDetails.bind(student2, 20);
+// displayForStudent2(20);
+
+// const product = {
+//   name: "Iphone",
+// };
+// console.log("Object.isExtensible(product):", Object.isExtensible(product));
