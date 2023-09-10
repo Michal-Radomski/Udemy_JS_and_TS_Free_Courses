@@ -94,13 +94,14 @@ const studentNames = ["John", "Bob", "Harry"];
 const sn = new Array("John", "Bob", "Harry");
 console.log("studentNames[0]:", studentNames[0]);
 console.log("sn[0]:", sn[0]);
+console.log("typeof student, s1, studentNames, sn:", typeof student, typeof s1, typeof studentNames, typeof sn);
 
 function hello(name: string) {
   return "Hello " + name;
 }
 console.log("hello('Michal'):", hello("Michal"));
 const myFunc = new Function("name", "return 'Hello '+name");
-console.log('myFunc("Michal"):', myFunc("Michal"));
+console.log('myFunc("Michal"):', myFunc("Michal"), typeof myFunc);
 
 console.log("student instanceof Object):", student instanceof Object);
 console.log("studentNames instanceof Array:", studentNames instanceof Array);
@@ -108,3 +109,20 @@ console.log("hello instanceof Function:", hello instanceof Function);
 console.log("hello instanceof Object:", hello instanceof Function);
 console.log("studentNames instanceof Object: ", hello instanceof Function);
 console.log("student instanceof Array:", hello instanceof Function);
+
+const literalString = "This is a literal string";
+const stringObject = new String("String created with constructor");
+// @ts-ignore
+console.log("literalString instanceof String:", literalString instanceof String); // false, string primitive is not a String
+console.log("stringObject instanceof String:", stringObject instanceof String); // true
+// @ts-ignore
+console.log("literalString instanceof Object:", literalString instanceof Object); // false, string primitive is not an Object
+console.log("stringObject instanceof Object:", stringObject instanceof Object); // true
+console.log("typeof literalString, stringObject:", typeof literalString, typeof stringObject);
+
+const str1 = "test";
+const str2 = new String("test");
+console.log({ str1, str2 }, typeof str1, typeof str2);
+const str1_1 = str1.substring(1, 2);
+const str2_1 = str2.substring(1, 2);
+console.log({ str1_1, str2_1 }, typeof str1_1, typeof str2_1);
