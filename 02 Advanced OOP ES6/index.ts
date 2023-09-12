@@ -308,6 +308,8 @@ console.log(Object.values(object3)); // Expected output: Array ["someString", 42
 
 const obj = { foo: "bar", baz: 42 };
 console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
+console.log('obj.propertyIsEnumerable("baz"):', obj.propertyIsEnumerable("baz"));
+console.log('obj.propertyIsEnumerable("foo"):', obj.propertyIsEnumerable("foo"));
 
 //* Operator: in
 const car = { make: "Honda", model: "Accord", year: 1998 } as { make?: string; model: string; year: number };
