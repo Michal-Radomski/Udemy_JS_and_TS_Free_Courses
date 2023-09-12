@@ -262,9 +262,9 @@ course1.description = "Master Java Project Development"; //[[Put]]
 console.log({ course1, course2 });
 
 delete course1.description; //[[Delete]]
-console.log("description" in course1);
-console.log("toString" in course1);
-console.log(course1.hasOwnProperty("toString"));
+console.log('"description" in course1:', "description" in course1);
+console.log('"toString" in course1', "toString" in course1);
+console.log('course1.hasOwnProperty("toString"):', course1.hasOwnProperty("toString"));
 
 for (let eachProperty in course1) {
   console.log({ eachProperty });
@@ -274,9 +274,47 @@ for (let eachProperty in course1) {
 const allProperties = Object.keys(course1);
 console.log({ allProperties });
 
+const allValues = Object.values(course1);
+console.log({ allValues });
+
+const allEntries = Object.entries(course1);
+console.log({ allEntries });
+
 for (let i = 0; i < allProperties.length; i++) {
   console.log(allProperties[i]);
   console.log(course1[allProperties[i] as keyof typeof course1]);
 }
 console.log(course1.propertyIsEnumerable("name"));
 console.log(allProperties.propertyIsEnumerable("length"));
+
+//* hasOwnProperty() + Object.entries() + Object.keys() + Object.values()
+const object1 = {} as any;
+object1.property1 = 42;
+console.log("object1.hasOwnProperty('property1'):", object1.hasOwnProperty("property1")); // Expected output: true
+
+const object2 = {
+  a: "someString",
+  b: 42,
+  c: false,
+};
+console.log(Object.keys(object2)); // Expected output: Array ["a", "b", "c"]
+
+const object3 = {
+  a: "someString",
+  b: 42,
+  c: false,
+};
+console.log(Object.values(object3)); // Expected output: Array ["someString", 42, false]
+
+const obj = { foo: "bar", baz: 42 };
+console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
+
+//* Operator: in
+const car = { make: "Honda", model: "Accord", year: 1998 } as { make?: string; model: string; year: number };
+console.log("make" in car); // Expected output: true
+
+delete car.make;
+if ("make" in car === false) {
+  car.make = "Suzuki";
+}
+console.log(car.make); // Expected output: "Suzuki"
