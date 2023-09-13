@@ -287,7 +287,7 @@ for (let i = 0; i < allProperties.length; i++) {
 console.log(course1.propertyIsEnumerable("name"));
 console.log(allProperties.propertyIsEnumerable("length"));
 
-//* hasOwnProperty() + Object.entries() + Object.keys() + Object.values()
+//* hasOwnProperty() + Object.entries() + Object.keys() + Object.values() + Object.hasOwn()
 const object1 = {} as any;
 object1.property1 = 42;
 console.log("object1.hasOwnProperty('property1'):", object1.hasOwnProperty("property1")); // Expected output: true
@@ -310,6 +310,12 @@ const obj = { foo: "bar", baz: 42 };
 console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
 console.log('obj.propertyIsEnumerable("baz"):', obj.propertyIsEnumerable("baz"));
 console.log('obj.propertyIsEnumerable("foo"):', obj.propertyIsEnumerable("foo"));
+
+const object4 = {
+  prop: "exists",
+};
+console.log("Object.hasOwn(object4, 'prop'):", Object.hasOwn(object4, "prop")); // Expected output: true
+console.log("Object.hasOwn(object4, 'toString'):", Object.hasOwn(object4, "toString")); // Expected output: false
 
 //* Operator: in
 const car = { make: "Honda", model: "Accord", year: 1998 } as { make?: string; model: string; year: number };
