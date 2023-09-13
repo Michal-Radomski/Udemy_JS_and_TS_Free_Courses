@@ -251,78 +251,109 @@
 // console.log("Object.isExtensible(product):", Object.isExtensible(product));
 
 //@ Objects
-const course1 = {
-  name: "JavaScript fundamentals", //[[Put]]
-} as { name: string; description?: string };
+// const course1 = {
+//   name: "JavaScript fundamentals", //[[Put]]
+// } as { name: string; description?: string };
 
-const course2 = new Object() as { name: string };
-course2.name = "ReactJS"; //[[Put]]
-course1.name = "End to End Java Project"; //[[Set]]
-course1.description = "Master Java Project Development"; //[[Put]]
-console.log({ course1, course2 });
+// const course2 = new Object() as { name: string };
+// course2.name = "ReactJS"; //[[Put]]
+// course1.name = "End to End Java Project"; //[[Set]]
+// course1.description = "Master Java Project Development"; //[[Put]]
+// console.log({ course1, course2 });
 
-delete course1.description; //[[Delete]]
-console.log('"description" in course1:', "description" in course1);
-console.log('"toString" in course1', "toString" in course1);
-console.log('course1.hasOwnProperty("toString"):', course1.hasOwnProperty("toString"));
+// delete course1.description; //[[Delete]]
+// console.log('"description" in course1:', "description" in course1);
+// console.log('"toString" in course1', "toString" in course1);
+// console.log('course1.hasOwnProperty("toString"):', course1.hasOwnProperty("toString"));
 
-for (let eachProperty in course1) {
-  console.log({ eachProperty });
-  console.log(course1[eachProperty as keyof typeof course1]);
-}
+// for (let eachProperty in course1) {
+//   console.log({ eachProperty });
+//   console.log(course1[eachProperty as keyof typeof course1]);
+// }
 
-const allProperties = Object.keys(course1);
-console.log({ allProperties });
+// const allProperties = Object.keys(course1);
+// console.log({ allProperties });
 
-const allValues = Object.values(course1);
-console.log({ allValues });
+// const allValues = Object.values(course1);
+// console.log({ allValues });
 
-const allEntries = Object.entries(course1);
-console.log({ allEntries });
+// const allEntries = Object.entries(course1);
+// console.log({ allEntries });
 
-for (let i = 0; i < allProperties.length; i++) {
-  console.log(allProperties[i]);
-  console.log(course1[allProperties[i] as keyof typeof course1]);
-}
-console.log(course1.propertyIsEnumerable("name"));
-console.log(allProperties.propertyIsEnumerable("length"));
+// for (let i = 0; i < allProperties.length; i++) {
+//   console.log(allProperties[i]);
+//   console.log(course1[allProperties[i] as keyof typeof course1]);
+// }
+// console.log(course1.propertyIsEnumerable("name"));
+// console.log(allProperties.propertyIsEnumerable("length"));
 
-//* hasOwnProperty() + Object.entries() + Object.keys() + Object.values() + Object.hasOwn()
-const object1 = {} as any;
-object1.property1 = 42;
-console.log("object1.hasOwnProperty('property1'):", object1.hasOwnProperty("property1")); // Expected output: true
+// //* hasOwnProperty() + Object.entries() + Object.keys() + Object.values() + Object.hasOwn()
+// const object1 = {} as any;
+// object1.property1 = 42;
+// console.log("object1.hasOwnProperty('property1'):", object1.hasOwnProperty("property1")); // Expected output: true
 
-const object2 = {
-  a: "someString",
-  b: 42,
-  c: false,
-};
-console.log(Object.keys(object2)); // Expected output: Array ["a", "b", "c"]
+// const object2 = {
+//   a: "someString",
+//   b: 42,
+//   c: false,
+// };
+// console.log(Object.keys(object2)); // Expected output: Array ["a", "b", "c"]
 
-const object3 = {
-  a: "someString",
-  b: 42,
-  c: false,
-};
-console.log(Object.values(object3)); // Expected output: Array ["someString", 42, false]
+// const object3 = {
+//   a: "someString",
+//   b: 42,
+//   c: false,
+// };
+// console.log(Object.values(object3)); // Expected output: Array ["someString", 42, false]
 
-const obj = { foo: "bar", baz: 42 };
-console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
-console.log('obj.propertyIsEnumerable("baz"):', obj.propertyIsEnumerable("baz"));
-console.log('obj.propertyIsEnumerable("foo"):', obj.propertyIsEnumerable("foo"));
+// const obj = { foo: "bar", baz: 42 };
+// console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
+// console.log('obj.propertyIsEnumerable("baz"):', obj.propertyIsEnumerable("baz"));
+// console.log('obj.propertyIsEnumerable("foo"):', obj.propertyIsEnumerable("foo"));
 
-const object4 = {
-  prop: "exists",
-};
-console.log("Object.hasOwn(object4, 'prop'):", Object.hasOwn(object4, "prop")); // Expected output: true
-console.log("Object.hasOwn(object4, 'toString'):", Object.hasOwn(object4, "toString")); // Expected output: false
+// const object4 = {
+//   prop: "exists",
+// };
+// console.log("Object.hasOwn(object4, 'prop'):", Object.hasOwn(object4, "prop")); // Expected output: true
+// console.log("Object.hasOwn(object4, 'toString'):", Object.hasOwn(object4, "toString")); // Expected output: false
 
-//* Operator: in
-const car = { make: "Honda", model: "Accord", year: 1998 } as { make?: string; model: string; year: number };
-console.log("make" in car); // Expected output: true
+// //* Operator: in
+// const car = { make: "Honda", model: "Accord", year: 1998 } as { make?: string; model: string; year: number };
+// console.log("make" in car); // Expected output: true
 
-delete car.make;
-if ("make" in car === false) {
-  car.make = "Suzuki";
-}
-console.log(car.make); // Expected output: "Suzuki"
+// delete car.make;
+// if ("make" in car === false) {
+//   car.make = "Suzuki";
+// }
+// console.log(car.make); // Expected output: "Suzuki"
+
+// const creditCard = {
+//   _name: "John",
+//   get name() {
+//     return this._name;
+//   },
+//   set name(value) {
+//     this._name = value;
+//   },
+// };
+// console.log("creditCard.name:", creditCard.name);
+// creditCard.name = "Bob";
+// console.log("creditCard.name:", creditCard.name);
+// creditCard._name = "Mich";
+// console.log({creditCard});
+
+const creditCard2 = {
+  _name: "John",
+} as { _name?: string };
+
+Object.defineProperty(creditCard2, "name", {
+  get: function () {
+    return this._name;
+  },
+});
+
+console.log("name" in creditCard2);
+console.log(creditCard2.propertyIsEnumerable("name"));
+
+delete creditCard2._name;
+console.log("name" in creditCard2);
