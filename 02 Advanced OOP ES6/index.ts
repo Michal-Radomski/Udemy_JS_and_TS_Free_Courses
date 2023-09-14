@@ -342,18 +342,26 @@
 // creditCard._name = "Mich";
 // console.log({creditCard});
 
-const creditCard2 = {
-  _name: "John",
-} as { _name?: string };
+// const creditCard2 = {
+//   _name: "John",
+// } as { _name?: string };
 
-Object.defineProperty(creditCard2, "name", {
-  get: function () {
-    return this._name;
-  },
-});
+// Object.defineProperty(creditCard2, "name", {
+//   get: function () {
+//     return this._name;
+//   },
+// });
 
-console.log("name" in creditCard2);
-console.log(creditCard2.propertyIsEnumerable("name"));
+// console.log("name" in creditCard2);
+// console.log(creditCard2.propertyIsEnumerable("name"));
 
-delete creditCard2._name;
-console.log("name" in creditCard2);
+// delete creditCard2._name;
+// console.log("name" in creditCard2);
+
+// const object1 = {} as { property1: number };
+// Object.defineProperty(object1, "property1", {
+//   value: 42,
+//   writable: false,
+// });
+// object1.property1 = 77; // Throws an error in strict mode
+// console.log("object1.property1:", object1.property1); // Expected output: 42
