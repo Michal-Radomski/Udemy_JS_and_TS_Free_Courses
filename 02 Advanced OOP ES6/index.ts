@@ -454,19 +454,39 @@
 // product.price = 700; //* Error
 // console.log("price" in product);
 
+// const product = {
+//   name: "Iphone",
+// } as { name?: string; price?: number };
+// console.log(Object.isExtensible(product));
+// console.log(Object.isSealed(product));
+// Object.seal(product);
+// console.log(Object.isExtensible(product));
+// console.log(Object.isSealed(product));
+
+// product.price = 10; //* Error
+// console.log("price" in product);
+// delete product.name;
+// console.log("name" in product);
+
+// const descriptor = Object.getOwnPropertyDescriptor(product, "name");
+// console.log(descriptor?.configurable);
+
 const product = {
   name: "Iphone",
-} as { name?: string; price?: number };
+};
 console.log(Object.isExtensible(product));
 console.log(Object.isSealed(product));
-Object.seal(product);
-console.log(Object.isExtensible(product));
-console.log(Object.isSealed(product));
+console.log(Object.isFrozen(product));
 
-product.price = 10; //* Error
-console.log("price" in product);
-delete product.name;
-console.log("name" in product);
+Object.freeze(product);
+
+console.log(Object.isExtensible(product));
+console.log(Object.isSealed(product));
+console.log(Object.isFrozen(product));
+
+// product.name = "Mac Book Pro"; //* Error
+console.log(product.name);
 
 const descriptor = Object.getOwnPropertyDescriptor(product, "name");
-console.log(descriptor?.configurable);
+console.log(descriptor!.configurable);
+console.log(descriptor!.writable);
