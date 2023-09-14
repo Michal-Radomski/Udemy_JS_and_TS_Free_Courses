@@ -362,6 +362,25 @@
 // Object.defineProperty(object1, "property1", {
 //   value: 42,
 //   writable: false,
+//   enumerable: false,
+//   configurable: false,
 // });
 // object1.property1 = 77; // Throws an error in strict mode
 // console.log("object1.property1:", object1.property1); // Expected output: 42
+
+var creditCard = {} as { name?: string };
+Object.defineProperty(creditCard, "name", {
+  value: "John",
+  enumerable: true, // By default: false
+  configurable: true, // By default: false
+  writable: true, // By default: false
+});
+
+console.log("name" in creditCard);
+console.log(creditCard.propertyIsEnumerable("name"));
+
+delete creditCard.name;
+console.log("name" in creditCard);
+
+creditCard.name = "Bob";
+console.log(creditCard.name);
