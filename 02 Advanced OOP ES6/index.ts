@@ -368,19 +368,105 @@
 // object1.property1 = 77; // Throws an error in strict mode
 // console.log("object1.property1:", object1.property1); // Expected output: 42
 
-var creditCard = {} as { name?: string };
-Object.defineProperty(creditCard, "name", {
-  value: "John",
-  enumerable: true, // By default: false
-  configurable: true, // By default: false
-  writable: true, // By default: false
-});
+// const creditCard = {} as { name?: string };
+// Object.defineProperty(creditCard, "name", {
+//   value: "John",
+//   enumerable: true, //* This method: by default: false
+//   configurable: true, //* This method: by default: false
+//   writable: true, //* This method: by default: false
+// });
 
-console.log("name" in creditCard);
-console.log(creditCard.propertyIsEnumerable("name"));
+// console.log("name" in creditCard);
+// console.log(creditCard.propertyIsEnumerable("name"));
 
-delete creditCard.name;
-console.log("name" in creditCard);
+// delete creditCard.name;
+// console.log("name" in creditCard);
 
-creditCard.name = "Bob";
-console.log(creditCard.name);
+// creditCard.name = "Bob";
+// console.log(creditCard.name);
+
+// const creditCard = {
+//   _name: "John",
+// } as { _name?: string };
+// Object.defineProperty(creditCard, "name", {
+//   get: function () {
+//     return this._name;
+//   },
+//   set: function (value: string) {
+//     this._name = value;
+//   },
+//   enumerable: true,
+//   configurable: true,
+//   // writable: true,
+// });
+
+// console.log("name" in creditCard);
+// console.log(creditCard.propertyIsEnumerable("name"));
+
+// delete creditCard._name;
+// console.log("name" in creditCard);
+// creditCard._name = "Bob";
+// console.log(creditCard._name);
+
+// const creditCard = {};
+
+// Object.defineProperties(creditCard, {
+//   _name: {
+//     value: "John",
+//     enumerable: true,
+//     configurable: true,
+//     writable: true,
+//   },
+//   name: {
+//     get: function () {
+//       return this._name;
+//     },
+//     set: function (value) {
+//       this._name = value;
+//     },
+//     enumerable: true,
+//     configurable: true,
+//   },
+// });
+
+// const creditCard = {
+//   name: "John",
+// };
+
+// const descriptor = Object.getOwnPropertyDescriptor(creditCard, "name");
+// console.log({ descriptor: descriptor });
+
+// console.log("descriptor?.enumerable:", descriptor?.enumerable); //* This method: by default: true
+// console.log("descriptor?.configurable:", descriptor?.configurable); //* This method: by default: true
+// console.log("descriptor?.writable:", descriptor?.writable); //* This method: by default: true
+// console.log("descriptor?.value:", descriptor?.value);
+
+// const product = {
+//   name: "Iphone",
+// } as {
+//   name: string;
+//   price?: number;
+// };
+// console.log("Object.isExtensible(product):", Object.isExtensible(product)); //* Default: true
+// Object.preventExtensions(product);
+// console.log("Object.isExtensible(product):", Object.isExtensible(product));
+
+// product.price = 700; //* Error
+// console.log("price" in product);
+
+const product = {
+  name: "Iphone",
+} as { name?: string; price?: number };
+console.log(Object.isExtensible(product));
+console.log(Object.isSealed(product));
+Object.seal(product);
+console.log(Object.isExtensible(product));
+console.log(Object.isSealed(product));
+
+product.price = 10; //* Error
+console.log("price" in product);
+delete product.name;
+console.log("name" in product);
+
+const descriptor = Object.getOwnPropertyDescriptor(product, "name");
+console.log(descriptor?.configurable);
