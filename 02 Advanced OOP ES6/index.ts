@@ -510,3 +510,32 @@
 // console.log('Object.getOwnPropertyDescriptor(license, "number"):', Object.getOwnPropertyDescriptor(license, "number"));
 // Object.seal(license);
 // console.log("Object.isSealed(license):", Object.isSealed(license));
+
+//* Object.assign()
+// const obj = { a: 1 };
+// const copy = Object.assign({}, obj);
+// console.log({ copy }); // { a: 1 }
+
+//@ Constructors and Prototypes
+function Flight(this: any, airlines: string, flightNumber: string) {
+  this.airlines = airlines;
+  this.flightNumber = flightNumber;
+
+  this.display = function () {
+    console.log("this.airlines:", this.airlines);
+    console.log("this.flightNumber:", this.flightNumber);
+  };
+}
+
+const flight1 = new (Flight as any)("American Airlines", "AA123");
+const flight2 = new (Flight as any)("South West", "SW456");
+
+flight1.display();
+flight2.display();
+
+console.log("flight1 instanceof Flight:", flight1 instanceof Flight);
+console.log("flight2 instanceof Flight:", flight2 instanceof Flight);
+
+console.log("flight1.constructor === Flight:", flight1.constructor === Flight);
+console.log("flight2.constructor === Flight:", flight2.constructor === Flight);
+console.log("flight1.constructor:", flight1.constructor);
