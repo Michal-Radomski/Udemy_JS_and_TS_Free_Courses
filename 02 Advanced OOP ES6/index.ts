@@ -517,25 +517,56 @@
 // console.log({ copy }); // { a: 1 }
 
 //@ Constructors and Prototypes
-function Flight(this: any, airlines: string, flightNumber: string) {
-  this.airlines = airlines;
-  this.flightNumber = flightNumber;
+// function Flight(this: any, airlines: string, flightNumber: string) {
+//   this.airlines = airlines; //* this = current object
+//   this.flightNumber = flightNumber; //* this = current object
 
-  this.display = function () {
-    console.log("this.airlines:", this.airlines);
-    console.log("this.flightNumber:", this.flightNumber);
-  };
-}
+//   this.display = function () {
+//     console.log("this.airlines:", this.airlines);
+//     console.log("this.flightNumber:", this.flightNumber);
+//   };
+//   console.log("this:", this);
+//   return this;
+// }
 
-const flight1 = new (Flight as any)("American Airlines", "AA123");
-const flight2 = new (Flight as any)("South West", "SW456");
+// const flight1 = new (Flight as any)("American Airlines", "AA123");
+// const flight2 = new (Flight as any)("South West", "SW456");
 
-flight1.display();
-flight2.display();
+// flight1.display();
+// flight2.display();
 
-console.log("flight1 instanceof Flight:", flight1 instanceof Flight);
-console.log("flight2 instanceof Flight:", flight2 instanceof Flight);
+// console.log("flight1 instanceof Flight:", flight1 instanceof Flight);
+// console.log("flight2 instanceof Flight:", flight2 instanceof Flight);
 
-console.log("flight1.constructor === Flight:", flight1.constructor === Flight);
-console.log("flight2.constructor === Flight:", flight2.constructor === Flight);
-console.log("flight1.constructor:", flight1.constructor);
+// console.log("flight1.constructor === Flight:", flight1.constructor === Flight);
+// console.log("flight2.constructor === Flight:", flight2.constructor === Flight);
+// console.log("flight1.constructor:", flight1.constructor);
+
+// function Laptop(this: any, manufacturer: string, memory: string, capacity: undefined) {
+//   this.manufacturer = manufacturer;
+//   this.memory = memory;
+//   this.capacity = capacity;
+//   this.display = function () {
+//     console.log(
+//       `The laptop was manufactured by: ${this.manufacturer}, memory: ${this.memory} RAM and HDD: ${this.capacity}`
+//     );
+//   };
+//   return this;
+// }
+
+// const toshibaLaptop = new (Laptop as any)("Toshiba", "16GB", "2TB");
+// const acerLaptop = new (Laptop as any)("Acer", "32GB", "6TB");
+
+// toshibaLaptop.display();
+// acerLaptop.display();
+
+//@ Prototypes
+const passenger = {
+  name: "John",
+};
+
+console.log("name" in passenger);
+console.log(passenger.hasOwnProperty("name"));
+console.log("hasOwnProperty" in passenger);
+console.log(passenger.hasOwnProperty("hasOwnProperty"));
+console.log('Object.prototype.hasOwnProperty("hasOwnProperty"):', Object.prototype.hasOwnProperty("hasOwnProperty"));
