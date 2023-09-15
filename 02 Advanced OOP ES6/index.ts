@@ -471,22 +471,42 @@
 // const descriptor = Object.getOwnPropertyDescriptor(product, "name");
 // console.log(descriptor?.configurable);
 
-const product = {
-  name: "Iphone",
-};
-console.log(Object.isExtensible(product));
-console.log(Object.isSealed(product));
-console.log(Object.isFrozen(product));
+// const product = {
+//   name: "Iphone",
+// };
+// console.log(Object.isExtensible(product));
+// console.log(Object.isSealed(product));
+// console.log(Object.isFrozen(product));
 
-Object.freeze(product);
+// Object.freeze(product);
 
-console.log(Object.isExtensible(product));
-console.log(Object.isSealed(product));
-console.log(Object.isFrozen(product));
+// console.log(Object.isExtensible(product));
+// console.log(Object.isSealed(product));
+// console.log(Object.isFrozen(product));
 
-// product.name = "Mac Book Pro"; //* Error
-console.log(product.name);
+// // product.name = "Mac Book Pro"; //* Error
+// console.log(product.name);
 
-const descriptor = Object.getOwnPropertyDescriptor(product, "name");
-console.log(descriptor!.configurable);
-console.log(descriptor!.writable);
+// const descriptor = Object.getOwnPropertyDescriptor(product, "name");
+// console.log(descriptor!.configurable);
+// console.log(descriptor!.writable);
+
+// const license = {
+//   name: "Test",
+//   number: "123",
+// };
+// Object.defineProperties(license, {
+//   name: {
+//     configurable: true,
+//     writable: true,
+//   },
+//   number: {
+//     enumerable: true,
+//     writable: true,
+//   },
+// });
+
+// console.log("Object.getOwnPropertyDescriptor(license, 'name'):", Object.getOwnPropertyDescriptor(license, "name"));
+// console.log('Object.getOwnPropertyDescriptor(license, "number"):', Object.getOwnPropertyDescriptor(license, "number"));
+// Object.seal(license);
+// console.log("Object.isSealed(license):", Object.isSealed(license));
