@@ -559,14 +559,22 @@
 
 // toshibaLaptop.display();
 // acerLaptop.display();
+// console.log("Object.getPrototypeOf(toshibaLaptop):", Object.getPrototypeOf(toshibaLaptop));
+// console.log("Laptop.prototype.isPrototypeOf(toshibaLaptop):", Laptop.prototype.isPrototypeOf(toshibaLaptop));
 
 //@ Prototypes
-const passenger = {
-  name: "John",
-};
+// const passenger = {
+//   name: "John",
+// };
 
-console.log("name" in passenger);
-console.log(passenger.hasOwnProperty("name"));
-console.log("hasOwnProperty" in passenger);
-console.log(passenger.hasOwnProperty("hasOwnProperty"));
-console.log('Object.prototype.hasOwnProperty("hasOwnProperty"):', Object.prototype.hasOwnProperty("hasOwnProperty"));
+// console.log("name" in passenger);
+// console.log(passenger.hasOwnProperty("name"));
+// console.log("hasOwnProperty" in passenger);
+// console.log(passenger.hasOwnProperty("hasOwnProperty"));
+// console.log('Object.prototype.hasOwnProperty("hasOwnProperty"):', Object.prototype.hasOwnProperty("hasOwnProperty"));
+// console.log("Object.prototype:", Object.prototype);
+
+const myObj = {};
+const prototype = Object.getPrototypeOf(myObj);
+console.log("prototype === Object.prototype:", prototype === Object.prototype);
+console.log("prototype.isPrototypeOf(myObj):", prototype.isPrototypeOf(myObj));
