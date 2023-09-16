@@ -714,32 +714,55 @@
 // console.log("surgeon instanceof Surgeon:", surgeon instanceof Surgeon);
 // console.log("surgeon instanceof Object:", surgeon instanceof Object);
 
-//@ Patterns
-const account = (function () {
-  let balance = 1000;
+//@ Patterns -> module pattern (IIFE)
+// const account = (function () {
+//   // private variable
+//   let balance = 1000;
 
-  function getBalance() {
-    return balance;
-  }
+//   // public method
+//   function getBalance() {
+//     return balance;
+//   }
 
-  function addInterest(interest: number) {
-    balance += interest;
-  }
+//   function addInterest(interest: number) {
+//     balance += interest;
+//   }
 
-  return {
-    balance: balance,
-    name: "John",
-    getBalance: getBalance,
-    addInterest: addInterest,
-  };
-})();
-console.log("account:", account, typeof account);
+//   return {
+//     // balance: balance,
+//     name: "John",
+//     getBalance: getBalance,
+//     addInterest: addInterest,
+//   };
+// })();
+// console.log("account:", account, typeof account);
 
-console.log("account.name:", account.name);
-console.log("account.getBalance():", account.getBalance());
+// console.log("account.name:", account.name);
+// console.log("account.getBalance():", account.getBalance());
 
-account.balance = 2000;
-console.log("account.getBalance():", account.getBalance());
+// // @ts-ignore
+// account.balance = 2000;
+// console.log("account.getBalance():", account.getBalance());
 
-account.addInterest(300);
-console.log("account.getBalance():", account.getBalance());
+// account.addInterest(300);
+// console.log("account.getBalance():", account.getBalance());
+
+//@ ES6
+// "use script";
+// const product = Object.freeze({}) as { name: string };
+// product["name"] = "test"; //* Error
+// console.log({ product });
+
+const add = (num1: number, num2: number) => num1 + num2;
+const div = (num1: number, num2: number) => num1 / num2;
+console.log("add(2,2):", add(2, 2));
+console.log("div(2,2):", div(2, 2));
+
+const student = {
+  firstName: "John",
+  lastName: "Doe",
+  score: "50",
+};
+
+const { firstName: fN, lastName: lN, score: score } = student;
+console.log({ fN, lN, score });
