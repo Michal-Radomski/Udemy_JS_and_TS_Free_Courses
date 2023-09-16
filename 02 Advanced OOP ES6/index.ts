@@ -574,7 +574,20 @@
 // console.log('Object.prototype.hasOwnProperty("hasOwnProperty"):', Object.prototype.hasOwnProperty("hasOwnProperty"));
 // console.log("Object.prototype:", Object.prototype);
 
-const myObj = {};
-const prototype = Object.getPrototypeOf(myObj);
-console.log("prototype === Object.prototype:", prototype === Object.prototype);
-console.log("prototype.isPrototypeOf(myObj):", prototype.isPrototypeOf(myObj));
+// const myObj = {};
+// const prototype = Object.getPrototypeOf(myObj);
+// console.log("prototype === Object.prototype:", prototype === Object.prototype);
+// console.log("prototype.isPrototypeOf(myObj):", prototype.isPrototypeOf(myObj));
+
+const myObj = {} as { toString?: any };
+console.log("myObj.toString()_1:", myObj.toString(), typeof myObj.toString());
+
+myObj.toString = function () {
+  return "My toString Method";
+};
+
+console.log("myObj.toString()_2:", myObj.toString());
+delete myObj.toString;
+console.log("myObj.toString()_3:", myObj.toString());
+delete myObj.toString;
+console.log("myObj.toString()_4:", myObj.toString());
