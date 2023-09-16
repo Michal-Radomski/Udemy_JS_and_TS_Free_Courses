@@ -661,55 +661,85 @@
 // project1.display();
 // project2.display();
 
-function Doctor(this: any, name: string) {
-  this.name = name;
-}
+// function Doctor(this: any, name: string) {
+//   this.name = name;
+// }
 
-// New method: treat
-Doctor.prototype.treat = function () {
-  return "treated";
-};
-// Now method: toString
-Doctor.prototype.toString = function () {
-  return "[Doctor " + this.name + "]";
-};
+// // New method: treat
+// Doctor.prototype.treat = function () {
+//   return "treated";
+// };
+// // Now method: toString
+// Doctor.prototype.toString = function () {
+//   return "[Doctor " + this.name + "]";
+// };
 
-function Surgeon(this: any, name: string, type: string) {
-  Doctor.call(this, name);
-  this.name = name;
-  this.type = type;
-}
+// function Surgeon(this: any, name: string, type: string) {
+//   Doctor.call(this, name);
+//   this.name = name;
+//   this.type = type;
+// }
 
-Surgeon.prototype = Object.create(Doctor.prototype, {
-  constructor: {
-    configurable: true,
-    enumerable: true,
-    value: Surgeon,
-    writable: true,
-  },
-});
+// Surgeon.prototype = Object.create(Doctor.prototype, {
+//   constructor: {
+//     configurable: true,
+//     enumerable: true,
+//     value: Surgeon,
+//     writable: true,
+//   },
+// });
 
-Surgeon.prototype.treat = function () {
-  return Doctor.prototype.treat.call(this) + " operated";
-};
+// Surgeon.prototype.treat = function () {
+//   return Doctor.prototype.treat.call(this) + " operated";
+// };
 
-Surgeon.prototype.toString = function () {
-  return "[Surgeon " + this.name + " type " + this.type + "]";
-};
+// Surgeon.prototype.toString = function () {
+//   return "[Surgeon " + this.name + " type " + this.type + "]";
+// };
 
-const doctor = new (Doctor as any)("John");
-const surgeon = new (Surgeon as any)("Bob", "Dental");
+// const doctor = new (Doctor as any)("John");
+// const surgeon = new (Surgeon as any)("Bob", "Dental");
 
-console.log("doctor.treat():", doctor.treat());
-console.log("surgeon.treat():", surgeon.treat());
+// console.log("doctor.treat():", doctor.treat());
+// console.log("surgeon.treat():", surgeon.treat());
 
-console.log("doctor.toString():", doctor.toString());
-console.log("surgeon.toString():", surgeon.toString());
+// console.log("doctor.toString():", doctor.toString());
+// console.log("surgeon.toString():", surgeon.toString());
 
-console.log("doctor instanceof Doctor:", doctor instanceof Doctor);
-console.log("doctor instanceof Object:", doctor instanceof Object);
-console.log("doctor instanceof Surgeon:", doctor instanceof Surgeon);
+// console.log("doctor instanceof Doctor:", doctor instanceof Doctor);
+// console.log("doctor instanceof Object:", doctor instanceof Object);
+// console.log("doctor instanceof Surgeon:", doctor instanceof Surgeon);
 
-console.log("surgeon instanceof Doctor:", surgeon instanceof Doctor);
-console.log("surgeon instanceof Surgeon:", surgeon instanceof Surgeon);
-console.log("surgeon instanceof Object:", surgeon instanceof Object);
+// console.log("surgeon instanceof Doctor:", surgeon instanceof Doctor);
+// console.log("surgeon instanceof Surgeon:", surgeon instanceof Surgeon);
+// console.log("surgeon instanceof Object:", surgeon instanceof Object);
+
+//@ Patterns
+const account = (function () {
+  let balance = 1000;
+
+  function getBalance() {
+    return balance;
+  }
+
+  function addInterest(interest: number) {
+    balance += interest;
+  }
+
+  return {
+    balance: balance,
+    name: "John",
+    getBalance: getBalance,
+    addInterest: addInterest,
+  };
+})();
+console.log("account:", account, typeof account);
+
+console.log("account.name:", account.name);
+console.log("account.getBalance():", account.getBalance());
+
+account.balance = 2000;
+console.log("account.getBalance():", account.getBalance());
+
+account.addInterest(300);
+console.log("account.getBalance():", account.getBalance());
