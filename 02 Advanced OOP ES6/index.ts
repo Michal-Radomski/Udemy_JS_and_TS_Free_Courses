@@ -821,3 +821,17 @@ for (let entry of map2.entries()) {
 }
 
 //* Set
+const stack: Set<string> = new Set(["Mongo", "PSQL"]);
+stack.add("TS");
+stack.add("React");
+stack.add("Redux");
+stack.add("Node");
+console.log({ stack }, stack.size);
+
+for (let entry of stack) {
+  console.log(entry);
+}
+
+// Use to remove duplicate elements from an array
+const numbers = [2, 3, 4, 4, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 5, 32, 3, 4, 5];
+console.log([...new Set(numbers)]); // [2, 3, 4, 5, 6, 7, 32]
