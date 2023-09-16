@@ -766,3 +766,45 @@ const student = {
 
 const { firstName: fN, lastName: lN, score: score } = student;
 console.log({ fN, lN, score });
+
+const courses = ["Java", "JS", "TS"];
+const [course1, course2, course3] = courses;
+console.log({ course1, course2, course3 });
+
+function add2({ num1 = 1, num2 = 2, num3 = 3 }: { num1?: number; num2?: number; num3?: number }) {
+  console.log(num1, num2, num3);
+}
+add2({ num1: 10, num2: 20, num3: 30 });
+add2({ num1: 10, num2: 20 });
+
+const array1 = ["a", "b", "c"];
+for (const element of array1) {
+  console.log(element); // "a", "b", "c"
+}
+for (const element in array1) {
+  console.log(element); // 0, 1, 2
+}
+
+const object = { a: 1, b: 2, c: 3 };
+for (const property in object) {
+  console.log(`${property}: ${object[property as keyof typeof object]}`); // "a: 1" ,"b: 2", "c: 3"
+}
+
+//* Map
+const map1: Map<string, number> = new Map();
+map1.set("a", 1);
+map1.set("b", 2);
+map1.set("c", 3);
+console.log(map1.get("a")); // Expected output: 1
+console.log({ map1 });
+console.log(map1.size);
+map1.delete("a");
+console.log(map1);
+map1.clear();
+console.log(map1, map1.size);
+
+const map2: Map<string, number> = new Map([
+  ["a", 1],
+  ["b", 2],
+]);
+console.log(map2);
