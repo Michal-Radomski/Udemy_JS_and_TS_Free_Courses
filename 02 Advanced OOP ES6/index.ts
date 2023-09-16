@@ -592,10 +592,10 @@
 // delete myObj.toString;
 // console.log("myObj.toString()_4:", myObj.toString());
 
-function Flight(this: any, airlines: string, flightNumber: undefined) {
-  this.airlines = airlines;
-  this.flightNumber = flightNumber;
-}
+// function Flight(this: any, airlines: string, flightNumber: undefined) {
+//   this.airlines = airlines;
+//   this.flightNumber = flightNumber;
+// }
 
 //* V1 only one method
 // Flight.prototype.display = function () {
@@ -633,3 +633,30 @@ function Flight(this: any, airlines: string, flightNumber: undefined) {
 //   console.log(this.toString());
 // };
 // ("Test" as any).display();
+
+//@ Inheritance
+// const project = {
+//   name: "Road Work",
+// };
+// console.log(project.hasOwnProperty("name"));
+// const prototype = Object.getPrototypeOf(project);
+// console.log(prototype === Object.prototype);
+
+const project1 = {
+  name: "Road Work",
+  display: function () {
+    console.log(this.name);
+  },
+};
+
+const project2 = Object.create(project1, {
+  name: {
+    configurable: true,
+    enumerable: true,
+    value: "Bridge Work",
+    writable: true,
+  },
+});
+
+project1.display();
+project2.display();
