@@ -808,3 +808,16 @@ const map2: Map<string, number> = new Map([
   ["b", 2],
 ]);
 console.log(map2);
+
+for (let key of map2.keys()) {
+  console.log(key);
+  console.log(map2.get(key));
+}
+for (let value of map2.values()) {
+  console.log(value);
+}
+for (let entry of map2.entries()) {
+  console.log(entry);
+}
+
+//* Set
