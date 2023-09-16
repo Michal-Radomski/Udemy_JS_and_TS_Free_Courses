@@ -665,10 +665,11 @@ function Doctor(this: any, name: string) {
   this.name = name;
 }
 
+// New method: treat
 Doctor.prototype.treat = function () {
   return "treated";
 };
-
+// Now method: toString
 Doctor.prototype.toString = function () {
   return "[Doctor " + this.name + "]";
 };
@@ -699,15 +700,16 @@ Surgeon.prototype.toString = function () {
 const doctor = new (Doctor as any)("John");
 const surgeon = new (Surgeon as any)("Bob", "Dental");
 
-console.log(doctor.treat());
-console.log(surgeon.treat());
+console.log("doctor.treat():", doctor.treat());
+console.log("surgeon.treat():", surgeon.treat());
 
-console.log(doctor.toString());
-console.log(surgeon.toString());
+console.log("doctor.toString():", doctor.toString());
+console.log("surgeon.toString():", surgeon.toString());
 
-console.log(doctor instanceof Doctor);
-console.log(doctor instanceof Object);
+console.log("doctor instanceof Doctor:", doctor instanceof Doctor);
+console.log("doctor instanceof Object:", doctor instanceof Object);
+console.log("doctor instanceof Surgeon:", doctor instanceof Surgeon);
 
-console.log(surgeon instanceof Doctor);
-console.log(surgeon instanceof Surgeon);
-console.log(surgeon instanceof Object);
+console.log("surgeon instanceof Doctor:", surgeon instanceof Doctor);
+console.log("surgeon instanceof Surgeon:", surgeon instanceof Surgeon);
+console.log("surgeon instanceof Object:", surgeon instanceof Object);
