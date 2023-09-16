@@ -597,33 +597,39 @@ function Flight(this: any, airlines: string, flightNumber: undefined) {
   this.flightNumber = flightNumber;
 }
 
-//* V1
+//* V1 only one method
 // Flight.prototype.display = function () {
 //   console.log(this.airlines);
 //   console.log(this.flightNumber);
 // };
 
-//* V2
-Flight.prototype = {
-  constructor: Flight,
+//* V2: many methods
+// Flight.prototype = {
+//   constructor: Flight,
 
-  display: function () {
-    console.log(this.airlines);
-    console.log(this.flightNumber);
-  },
+//   display: function () {
+//     console.log(this.airlines);
+//     console.log(this.flightNumber);
+//   },
 
-  toString: function () {
-    return "[Flight " + this.airlines + "," + this.flightNumber + "]";
-  },
-};
+//   toString: function () {
+//     return "[Flight " + this.airlines + "," + this.flightNumber + "]";
+//   },
+// };
 
-const flight1 = new (Flight as any)("American Airlines", "AA123");
-const flight2 = new (Flight as any)("South West", "SW456");
+// const flight1 = new (Flight as any)("American Airlines", "AA123");
+// const flight2 = new (Flight as any)("South West", "SW456");
 
-flight1.display();
-flight2.display();
-console.log(flight1.toString());
-console.log(flight2.toString());
-console.log(flight1 instanceof Flight);
-console.log(flight1.constructor === Flight);
-console.log(flight1.constructor === Object);
+// flight1.display();
+// flight2.display();
+// console.log(flight1.toString());
+// console.log(flight2.toString());
+// console.log(flight1 instanceof Flight);
+// console.log(flight1.constructor === Flight);
+// console.log(flight1.constructor === Object);
+
+//* Don't use it!
+// (String as any).prototype.display = function () {
+//   console.log(this.toString());
+// };
+// ("Test" as any).display();
