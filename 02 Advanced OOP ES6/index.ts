@@ -642,21 +642,72 @@
 // const prototype = Object.getPrototypeOf(project);
 // console.log(prototype === Object.prototype);
 
-const project1 = {
-  name: "Road Work",
-  display: function () {
-    console.log(this.name);
-  },
+// const project1 = {
+//   name: "Road Work",
+//   display: function () {
+//     console.log(this.name);
+//   },
+// };
+
+// const project2 = Object.create(project1, {
+//   name: {
+//     configurable: true,
+//     enumerable: true,
+//     value: "Bridge Work",
+//     writable: true,
+//   },
+// });
+
+// project1.display();
+// project2.display();
+
+function Doctor(this: any, name: string) {
+  this.name = name;
+}
+
+Doctor.prototype.treat = function () {
+  return "treated";
 };
 
-const project2 = Object.create(project1, {
-  name: {
+Doctor.prototype.toString = function () {
+  return "[Doctor " + this.name + "]";
+};
+
+function Surgeon(this: any, name: string, type: string) {
+  Doctor.call(this, name);
+  this.name = name;
+  this.type = type;
+}
+
+Surgeon.prototype = Object.create(Doctor.prototype, {
+  constructor: {
     configurable: true,
     enumerable: true,
-    value: "Bridge Work",
+    value: Surgeon,
     writable: true,
   },
 });
 
-project1.display();
-project2.display();
+Surgeon.prototype.treat = function () {
+  return Doctor.prototype.treat.call(this) + " operated";
+};
+
+Surgeon.prototype.toString = function () {
+  return "[Surgeon " + this.name + " type " + this.type + "]";
+};
+
+const doctor = new (Doctor as any)("John");
+const surgeon = new (Surgeon as any)("Bob", "Dental");
+
+console.log(doctor.treat());
+console.log(surgeon.treat());
+
+console.log(doctor.toString());
+console.log(surgeon.toString());
+
+console.log(doctor instanceof Doctor);
+console.log(doctor instanceof Object);
+
+console.log(surgeon instanceof Doctor);
+console.log(surgeon instanceof Surgeon);
+console.log(surgeon instanceof Object);
