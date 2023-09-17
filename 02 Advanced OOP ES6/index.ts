@@ -848,7 +848,51 @@ class Passenger {
   }
 }
 
-const passenger = new Passenger("Mich", "Rad", 1234);
+const passenger = new Passenger("Mich", "Rad", 1234) as Passenger;
 console.log({ passenger });
-const passenger_2 = new Passenger("John", "Doe", 4321);
+const passenger_2 = new Passenger("John", "Doe", 4321) as Passenger;
 console.log({ passenger_2 });
+
+class BMW {
+  make: string;
+  model: string;
+  year: number;
+  constructor(make: string, model: string, year: number) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+  start() {
+    console.log("Start Engine");
+  }
+  stop() {
+    console.log("Stop Engine");
+  }
+}
+
+class ThreeSeries extends BMW {
+  cruiseControlEnable: boolean;
+  constructor(make: string, model: string, year: number, cruiseControlEnable: boolean) {
+    super(make, model, year);
+    this.cruiseControlEnable = cruiseControlEnable;
+  }
+}
+
+class FiveSeries extends ThreeSeries {
+  parkingAssistanceEnabled: boolean;
+  constructor(make: string, model: string, year: number, cruiseControlEnable: boolean, parkingAssistanceEnabled: boolean) {
+    super(make, model, year, cruiseControlEnable);
+    this.parkingAssistanceEnabled = parkingAssistanceEnabled;
+  }
+  start() {
+    console.log("Remote Start");
+  }
+}
+
+let threeSeries = new ThreeSeries("BMW", "328", 2018, true);
+let fiveSeries = new FiveSeries("BMW", "535", 2018, true, true);
+
+console.log({ threeSeries, fiveSeries });
+threeSeries.start();
+fiveSeries.stop();
+fiveSeries.start();
