@@ -835,3 +835,20 @@ for (let entry of stack) {
 // Use to remove duplicate elements from an array
 const numbers = [2, 3, 4, 4, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 5, 32, 3, 4, 5];
 console.log([...new Set(numbers)]); // [2, 3, 4, 5, 6, 7, 32]
+
+//* Classes
+class Passenger {
+  firstName: string;
+  lastName: string;
+  frequentFlyerNumber: number;
+  constructor(firstName: string, lastName: string, frequentFlyerNumber: number) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.frequentFlyerNumber = frequentFlyerNumber;
+  }
+}
+
+const passenger = new Passenger("Mich", "Rad", 1234);
+console.log({ passenger });
+const passenger_2 = new Passenger("John", "Doe", 4321);
+console.log({ passenger_2 });
