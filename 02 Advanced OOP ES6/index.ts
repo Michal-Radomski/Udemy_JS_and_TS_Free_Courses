@@ -896,3 +896,27 @@ console.log({ threeSeries, fiveSeries });
 threeSeries.start();
 fiveSeries.stop();
 fiveSeries.start();
+
+//* Promises
+function myAsyncFunction() {
+  const promise = new Promise<string>((resolve, reject) => {
+    // let error = true;
+    let error = false;
+    setTimeout(() => {
+      console.log("Working async");
+      if (error) {
+        reject("Error");
+      } else {
+        resolve("Done");
+      }
+    }, 100);
+  });
+  return promise;
+}
+myAsyncFunction()
+  .then((success) => {
+    console.log("Work done", success);
+  })
+  .catch((error: Error) => {
+    console.log("Error: " + error);
+  });
