@@ -27,36 +27,56 @@
 //   console.log("this:", this);
 // })();
 
-const Mich = {
-  firstName: "Mich",
-  testing() {
-    console.log("this:", this);
-    // function innerFunction() {
-    //   console.log("this:", this);
-    // }
-    // innerFunction();
-  },
-};
-Mich.testing();
-
-var Mich2 = {
-  firstName: "Mich2",
-  testing() {
-    console.log("this:", this);
-  },
-};
-Mich2.testing();
-
-// const testing = () => {
-//   console.log("this:", this as typeof globalThis);
+// const Mich = {
+//   firstName: "Mich",
+//   testing() {
+//     console.log("this:", this);
+//     // function innerFunction() {
+//     //   console.log("this:", this);
+//     // }
+//     // innerFunction();
+//   },
 // };
-// testing();
+// Mich.testing();
 
-// console.log(self);
-// console.log("globalThis:", globalThis);
+// var Mich2 = {
+//   firstName: "Mich2",
+//   testing() {
+//     console.log("this:", this);
+//   },
+// };
+// Mich2.testing();
 
-const Johny = {
-  firstName: "Johny",
-} as any;
-Johny.testing = Mich.testing;
-Johny.testing();
+// // const testing = () => {
+// //   console.log("this:", this as typeof globalThis);
+// // };
+// // testing();
+
+// // console.log(self);
+// // console.log("globalThis:", globalThis);
+
+// const Johny = {
+//   firstName: "Johny",
+// } as any;
+// Johny.testing = Mich.testing;
+// Johny.testing();
+
+// const Mona = {
+//   firstName: "Mona",
+// } as any;
+// Mona.testing = Johny.testing;
+// Mona.testing();
+
+//* New operator
+// const john = {
+//   firstName: "John",
+//   lastName: "Doe"
+// }
+
+const BluePrint = function (this: any, firstName: string, lastName: string) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+};
+
+const john = new (BluePrint as any)("John", "Doe");
+console.log({ john });
