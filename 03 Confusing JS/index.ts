@@ -86,25 +86,30 @@
 // const myLocations = ["Olsztyn", "Gdansk", "Poznan"];
 // listLocations(myLocations);
 
+// let id = 10;
 // console.log(1, "Starting");
 // setTimeout(() => {
 //   console.log(4, "Waiting 2s");
 // }, 2000);
-// setTimeout(() => {
-//   console.log(3, "Waiting 0s");
-// }, 0);
+// setTimeout(
+//   (id) => {
+//     console.log(3, "Waiting 0s for id: " + id);
+//   },
+//   0,
+//   id
+// );
 // console.log(2, "Ending");
 
 //* Callback
-const x = function (str: string): void {
-  console.log("Function X");
-  console.log({ str });
-};
-const y = function (callback: Function, str: string): void {
-  console.log("Function Y");
-  callback(str);
-};
-y(x, "string");
+// const x = function (str: string): void {
+//   console.log("Function X");
+//   console.log({ str });
+// };
+// const y = function (callback: Function, str: string): void {
+//   console.log("Function Y");
+//   callback(str);
+// };
+// y(x, "string");
 
 // const calc = function (num1: number, num2: number, calcType: string) {
 //   if (calcType === "add") {
@@ -122,3 +127,38 @@ const calc = function (num1: number, num2: number, calcType: Function) {
   return calcType(num1, num2);
 };
 console.log("calc(10,10, multiply):", calc(10, 10, multiply));
+
+//* Promise chaining
+// new Promise(function (resolve, _reject) {
+//   setTimeout(() => resolve(1), 1000); // (*)
+// })
+//   .then(function (result) {
+//     console.log(1, { result }); // 1
+//     return (result as number) * 2;
+//   })
+//   .then(function (result) {
+//     console.log(2, { result }); // 2
+//     return result * 2;
+//   })
+//   .then(function (result) {
+//     console.log(3, { result }); // 4
+//     return result * 2;
+//   })
+//   .catch(function (err) {
+//     console.log({ err });
+//   });
+
+//* Async/ await
+function resolveAfter2Seconds() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("resolved");
+    }, 2000);
+  });
+}
+
+(async function asyncCall() {
+  console.log("calling");
+  const result = await resolveAfter2Seconds();
+  console.log(result); // Expected output: "resolved"
+})();
