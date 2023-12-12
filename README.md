@@ -9,3 +9,5 @@ Files created during Udemy.com JS and TS free courses:
 3. [Oversimplified: The Most Confusing Javascript Concepts 2022](https://www.udemy.com/course/8-confusing-javascript-concepts-over-simplified)
 
 4. [TypeScript Design Patterns](https://www.udemy.com/course/typescript-design-patterns)
+
+5. [TypeScript Basic](https://www.udemy.com/course/typescript-in-a-nutshell)
