@@ -87,79 +87,193 @@
 // console.log("myTesla:", myTesla);
 
 //@ Observer Pattern
-interface Subject {
-  registerObserver(o: Observer): void;
-  removeObserver(o: Observer): void;
-  notifyObservers(): void;
+// interface Subject {
+//   registerObserver(o: Observer): void;
+//   removeObserver(o: Observer): void;
+//   notifyObservers(): void;
+// }
+
+// interface Observer {
+//   update(temperature: number): void;
+// }
+
+// // ------------------------------------------------------
+// class WeatherStation implements Subject {
+//   private observers: Observer[] = [];
+//   private temperature!: number;
+
+//   registerObserver(o: Observer) {
+//     this.observers.push(o);
+//   }
+
+//   removeObserver(o: Observer) {
+//     let index = this.observers.indexOf(o);
+//     this.observers.splice(index, 1);
+//   }
+
+//   notifyObservers() {
+//     for (let observer of this.observers) {
+//       observer.update(this.temperature);
+//     }
+//   }
+
+//   setTemperature(temp: number) {
+//     console.log("WeatherStation: new temperature measurement: " + temp);
+//     this.temperature = temp;
+//     this.notifyObservers();
+//   }
+// }
+
+// // ------------------------------------------------------
+// class TemperatureDisplay implements Observer {
+//   private subject: Subject;
+
+//   constructor(weatherStation: Subject) {
+//     this.subject = weatherStation;
+//     weatherStation.registerObserver(this);
+//   }
+
+//   update(temperature: number) {
+//     console.log("TemperatureDisplay: I need to update my display");
+//   }
+// }
+
+// class Fan implements Observer {
+//   private subject: Subject;
+
+//   constructor(weatherStation: Subject) {
+//     this.subject = weatherStation;
+//     weatherStation.registerObserver(this);
+//   }
+
+//   update(temperature: number) {
+//     if (temperature > 25) {
+//       console.log("Fan: Its hot here, turning myself on...");
+//     } else {
+//       console.log("Fan: Its nice and cool, turning myself off...");
+//     }
+//   }
+// }
+
+// let weatherStation = new WeatherStation();
+
+// let tempDisplay = new TemperatureDisplay(weatherStation);
+// let fan = new Fan(weatherStation);
+
+// weatherStation.setTemperature(20);
+// weatherStation.setTemperature(30);
+// console.log("weatherStation:", weatherStation);
+
+//@ Facade Pattern
+class BlurayPlayer {
+  on() {
+    console.log("Bluray player turning on...");
+  }
+
+  turnOff() {
+    console.log("Bluray turning off..");
+  }
+
+  play() {
+    console.log("Playing bluray disc...");
+  }
 }
 
-interface Observer {
-  update(temperature: number): void;
-}
-
-// ------------------------------------------------------
-class WeatherStation implements Subject {
-  private observers: Observer[] = [];
-  private temperature!: number;
-
-  registerObserver(o: Observer) {
-    this.observers.push(o);
+class Amplifier {
+  on() {
+    console.log("Amp is turning on..");
   }
 
-  removeObserver(o: Observer) {
-    let index = this.observers.indexOf(o);
-    this.observers.splice(index, 1);
+  turnOff() {
+    console.log("Amplifier turning off..");
   }
 
-  notifyObservers() {
-    for (let observer of this.observers) {
-      observer.update(this.temperature);
-    }
+  setSource(source: string) {
+    console.log("Setting source to " + source);
   }
 
-  setTemperature(temp: number) {
-    console.log("WeatherStation: new temperature measurement: " + temp);
-    this.temperature = temp;
-    this.notifyObservers();
+  setVolume(volumeLevel: number) {
+    console.log("Setting volume to " + volumeLevel);
   }
 }
 
-// ------------------------------------------------------
-class TemperatureDisplay implements Observer {
-  private subject: Subject;
-
-  constructor(weatherStation: Subject) {
-    this.subject = weatherStation;
-    weatherStation.registerObserver(this);
-  }
-
-  update(temperature: number) {
-    console.log("TemperatureDisplay: I need to update my display");
+class Lights {
+  dim() {
+    console.log("Lights are dimming..");
   }
 }
 
-class Fan implements Observer {
-  private subject: Subject;
-
-  constructor(weatherStation: Subject) {
-    this.subject = weatherStation;
-    weatherStation.registerObserver(this);
+class TV {
+  turnOn() {
+    console.log("TV turning on..");
   }
 
-  update(temperature: number) {
-    if (temperature > 25) {
-      console.log("Fan: Its hot here, turning myself on...");
-    } else {
-      console.log("Fan: Its nice and cool, turning myself off...");
-    }
+  turnOff() {
+    console.log("TV turning off..");
   }
 }
 
-let weatherStation = new WeatherStation();
+class PopcornMaker {
+  turnOn() {
+    console.log("Popcorn maker turning on..");
+  }
 
-let tempDisplay = new TemperatureDisplay(weatherStation);
-let fan = new Fan(weatherStation);
+  turnOff() {
+    console.log("Popcorn maker turning off..");
+  }
 
-weatherStation.setTemperature(20);
-weatherStation.setTemperature(30);
-console.log("weatherStation:", weatherStation);
+  pop() {
+    console.log("Popping corn!");
+  }
+}
+
+// ----
+class HomeTheaterFacade {
+  private bluray: BlurayPlayer;
+  private amp: Amplifier;
+  private lights: Lights;
+  private tv: TV;
+  private popcornMaker: PopcornMaker;
+
+  constructor(amp: Amplifier, bluray: BlurayPlayer, lights: Lights, tv: TV, popcornMaker: PopcornMaker) {
+    this.bluray = bluray;
+    this.amp = amp;
+    this.lights = lights;
+    this.tv = tv;
+    this.popcornMaker = popcornMaker;
+  }
+
+  public watchMovie() {
+    this.popcornMaker.turnOn();
+    this.popcornMaker.pop();
+
+    this.lights.dim();
+
+    this.tv.turnOn();
+
+    this.amp.on();
+    this.amp.setSource("bluray");
+    this.amp.setVolume(11);
+
+    this.bluray.on();
+    this.bluray.play();
+  }
+
+  endMovie() {
+    this.popcornMaker.turnOff();
+    this.amp.turnOff();
+    this.tv.turnOff();
+    this.bluray.turnOff();
+  }
+}
+
+// ----
+let bluray = new BlurayPlayer();
+let amp = new Amplifier();
+let lights = new Lights();
+let tv = new TV();
+let popcornMaker = new PopcornMaker();
+
+let hometheater = new HomeTheaterFacade(amp, bluray, lights, tv, popcornMaker);
+hometheater.watchMovie();
+console.log("hometheater:", hometheater);
