@@ -280,43 +280,166 @@
 // console.log("hometheater:", hometheater);
 
 //@ Adapter Pattern
-interface IPhone {
-  useLightning(): void;
-}
+// interface IPhone {
+//   useLightning(): void;
+// }
 
-interface Android {
-  useMicroUSB(): void;
-}
+// interface Android {
+//   useMicroUSB(): void;
+// }
 
-class iPhone7 implements IPhone {
-  useLightning() {
-    console.log("Using lightning port..");
+// class iPhone7 implements IPhone {
+//   useLightning() {
+//     console.log("Using lightning port..");
+//   }
+// }
+
+// class GooglePixel implements Android {
+//   useMicroUSB() {
+//     console.log("Using micro USB...");
+//   }
+// }
+
+// // -----
+// class LightningToMicroUSBAdapter implements Android {
+//   iphoneDevice: IPhone;
+
+//   constructor(iphone: IPhone) {
+//     this.iphoneDevice = iphone;
+//   }
+
+//   useMicroUSB() {
+//     console.log("Want to use micro USB, converting...");
+//     this.iphoneDevice.useLightning();
+//   }
+// }
+
+// const iphone = new iPhone7();
+// const chargeAdaptor = new LightningToMicroUSBAdapter(iphone);
+
+// chargeAdaptor.useMicroUSB();
+// console.log("iphone:", iphone);
+// console.log("chargeAdaptor:", chargeAdaptor);
+
+//@ State pattern
+module test {
+  interface State {
+    order: Order;
+    cancelOrder(): void;
+    verifyPayment(): void;
+    shipOrder(): void;
   }
-}
 
-class GooglePixel implements Android {
-  useMicroUSB() {
-    console.log("Using micro USB...");
+  class Order {
+    public cancelledOrderState: State;
+    public paymentPendingState: State;
+    public orderShippedState: State;
+    public orderBeingPrepared: State;
+    public currentState!: State;
+
+    constructor() {
+      this.cancelledOrderState = new CancelledOrderState(this);
+      this.paymentPendingState = new PaymentPendingState(this);
+      this.orderShippedState = new OrderShippedState(this);
+      this.orderBeingPrepared = new OrderBeingPrepared(this);
+
+      this.setState(this.paymentPendingState);
+    }
+
+    public setState(state: State) {
+      this.currentState = state;
+    }
+
+    public getCurrentState(): State {
+      return this.currentState;
+    }
   }
-}
 
-// -----
-class LightningToMicroUSBAdapter implements Android {
-  iphoneDevice: IPhone;
+  class CancelledOrderState implements State {
+    order: Order;
 
-  constructor(iphone: IPhone) {
-    this.iphoneDevice = iphone;
+    constructor(order: Order) {
+      this.order = order;
+    }
+
+    public cancelOrder() {
+      console.log("This order is already cancelled.");
+      this.order.setState(this.order.cancelledOrderState);
+    }
+
+    public verifyPayment() {
+      console.log("The order is cancelled, you cannot pay anymore.");
+    }
+
+    public shipOrder() {
+      console.log("The order is cancelled, you cannot ship it anymore.");
+    }
   }
 
-  useMicroUSB() {
-    console.log("Want to use micro USB, converting...");
-    this.iphoneDevice.useLightning();
+  class PaymentPendingState implements State {
+    order: Order;
+
+    constructor(order: Order) {
+      this.order = order;
+    }
+
+    cancelOrder() {
+      console.log("Cancelling your unpaid order...");
+      this.order.setState(this.order.cancelledOrderState);
+    }
+
+    verifyPayment() {
+      console.log("Payment verified! Shipping soon.");
+      this.order.setState(this.order.orderBeingPrepared);
+    }
+    shipOrder() {
+      console.log("Cannot ship order when payment is pending.");
+    }
   }
+
+  class OrderBeingPrepared implements State {
+    order: Order;
+
+    constructor(order: Order) {
+      this.order = order;
+    }
+
+    cancelOrder() {
+      console.log("Cancelling your order... You will be refunded.");
+      this.order.setState(this.order.cancelledOrderState);
+    }
+    verifyPayment() {
+      console.log("Payment is already verified.");
+    }
+    shipOrder() {
+      console.log("Shipping your order now...");
+      this.order.setState(this.order.orderShippedState);
+    }
+  }
+
+  class OrderShippedState implements State {
+    order: Order;
+
+    constructor(order: Order) {
+      this.order = order;
+    }
+
+    cancelOrder() {
+      console.log("You cannot cancel an order that has been shipped.");
+    }
+    verifyPayment() {
+      console.log("Payment is already verified.");
+    }
+    shipOrder() {
+      console.log("Order is already shipped.");
+    }
+  }
+
+  const order = new Order();
+
+  order.getCurrentState().verifyPayment();
+  order.getCurrentState().shipOrder();
+  order.getCurrentState().cancelOrder();
+  console.log("Order state: " + (<any>order.getCurrentState()).constructor.name);
+  console.log("order:", order);
 }
-
-const iphone = new iPhone7();
-const chargeAdaptor = new LightningToMicroUSBAdapter(iphone);
-
-chargeAdaptor.useMicroUSB();
-console.log("iphone:", iphone);
-console.log("chargeAdaptor:", chargeAdaptor);
