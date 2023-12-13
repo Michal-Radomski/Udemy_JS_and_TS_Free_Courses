@@ -1,11 +1,12 @@
-interface BasicUser {
+interface BasicUser<A = boolean> {
   name: string;
   surname: string;
   age: number;
-  isAdmin: boolean;
+  // isAdmin: boolean;
+  isAdmin: A;
 }
 
-const basicUser: BasicUser = {
+const basicUser: BasicUser<boolean> = {
   name: "Nick",
   surname: "Ovchinnikov",
   age: 30,
@@ -13,9 +14,10 @@ const basicUser: BasicUser = {
 };
 console.log("basicUser:", basicUser);
 
+// type UserPermissions = ["admin" , "user" , "manager"];
 type UserPermissions = "admin" | "user" | "manager";
 
-interface UserWithPermissions extends BasicUser {
+interface UserWithPermissions extends BasicUser<boolean> {
   permissions?: UserPermissions;
 }
 
@@ -24,6 +26,7 @@ const userWithPermissions: UserWithPermissions = {
   surname: "Ovchinnikov",
   age: 30,
   isAdmin: true,
+  // permissions: ["admin" , "user" , "manager"],
   permissions: "admin",
 };
 console.log("userWithPermissions:", userWithPermissions);
@@ -34,6 +37,13 @@ const mul: MathFunc = (a, b) => a * b;
 const add: MathFunc = (a, b) => a + b;
 console.log("mul(4,5):", mul(4, 5));
 console.log("add(4,5):", add(4, 5));
+
+//* Generics
+const usersArray: BasicUser[] = [basicUser, basicUser, basicUser];
+function getFirst<T>(arr: T[]): T {
+  return arr[0];
+}
+console.log("getFirst<BasicUser>(usersArray):", getFirst<BasicUser>(usersArray));
 
 // type UserPermissions = "admin" | "user" | "manager";
 
