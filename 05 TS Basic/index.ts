@@ -1,3 +1,5 @@
+type UserPermissions = "admin" | "user" | "manager";
+
 interface BasicUser<A = boolean> {
   name: string;
   surname: string;
@@ -6,16 +8,25 @@ interface BasicUser<A = boolean> {
   isAdmin: A;
 }
 
+//* Merging - don't do it!
+// interface BasicUser {
+//   account: number;
+// }
+
+interface AdvancedUser {
+  account: number;
+}
+
+type FullUser = BasicUser & AdvancedUser;
+
 const basicUser: BasicUser<boolean> = {
   name: "Nick",
   surname: "Ovchinnikov",
   age: 30,
   isAdmin: true,
+  // account: 30,
 };
 console.log("basicUser:", basicUser);
-
-// type UserPermissions = ["admin" , "user" , "manager"];
-type UserPermissions = "admin" | "user" | "manager";
 
 interface UserWithPermissions extends BasicUser<boolean> {
   permissions?: UserPermissions;
@@ -26,10 +37,19 @@ const userWithPermissions: UserWithPermissions = {
   surname: "Ovchinnikov",
   age: 30,
   isAdmin: true,
-  // permissions: ["admin" , "user" , "manager"],
   permissions: "admin",
+  // account: 50,
 };
 console.log("userWithPermissions:", userWithPermissions);
+
+const fullUser: FullUser = {
+  name: "Nick",
+  surname: "Ovchinnikov",
+  age: 30,
+  isAdmin: true,
+  account: 50,
+};
+console.log("fullUser:", fullUser);
 
 type MathFunc = (a: number, b: number) => number;
 // type MathFunc<T = number> = (a: T, b: T) => T;
