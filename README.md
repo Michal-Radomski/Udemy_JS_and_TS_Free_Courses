@@ -10,4 +10,4 @@ Files created during Udemy.com JS and TS free courses:
 
 4. [TypeScript Design Patterns](https://www.udemy.com/course/typescript-design-patterns)
 
-5. [TypeScript Basic](https://www.udemy.com/course/typescript-in-a-nutshell)
+5. [TypeScript Basic - Generics, UtilityTypes](https://www.udemy.com/course/typescript-in-a-nutshell)

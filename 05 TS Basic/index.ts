@@ -67,99 +67,100 @@
 // console.log("getFirst<BasicUser>(usersArray):", getFirst<BasicUser>(usersArray));
 
 //@ -> 2
-const logFunction = (data: unknown): void => {
-  console.log("data:", data);
-  // return data
-  return undefined;
-};
+// const logFunction = (data: unknown): void => {
+//   console.log("data:", data);
+//   // return data
+//   return undefined;
+// };
 
-const logFunction2 = (data: unknown): never => {
-  console.log("data:", data);
-  throw new Error("Bad");
-};
+// const logFunction2 = (data: unknown): never => {
+//   console.log("data:", data);
+//   throw new Error("Bad");
+// };
 
-type UserPermissions = "admin" | "user" | "manager";
-type TuplePermissions = [UserPermissions, number];
-const permissions: TuplePermissions = ["admin", 5];
-console.log("permissions", permissions);
+// type UserPermissions = "admin" | "user" | "manager";
+// type TuplePermissions = [UserPermissions, number];
+// const permissions: TuplePermissions = ["admin", 5];
+// console.log("permissions", permissions);
 
 //@ -> 3
-// type UserPermissions = "admin" | "user" | "manager";
+type UserPermissions = "admin" | "user" | "manager";
 
-// type PermissionsWithoutAdmin = Exclude<UserPermissions, "admin">;
+type PermissionsWithoutAdmin = Exclude<UserPermissions, "admin">;
 
-// interface DepartmentsForPermission {
-//   depName: string;
-//   lvl: number;
-// }
+interface DepartmentsForPermission {
+  depName: string;
+  lvl: number;
+}
 
-// const DepsForPerms: Record<UserPermissions, DepartmentsForPermission> = {
-//   admin: {
-//     depName: "security",
-//     lvl: 10,
-//   },
-//   user: {
-//     depName: "sales",
-//     lvl: 5,
-//   },
-//   manager: {
-//     depName: "sales",
-//     lvl: 10,
-//   },
-// };
+const DepsForPerms: Record<UserPermissions, DepartmentsForPermission> = {
+  admin: {
+    depName: "security",
+    lvl: 10,
+  },
+  user: {
+    depName: "sales",
+    lvl: 5,
+  },
+  manager: {
+    depName: "sales",
+    lvl: 10,
+  },
+};
 
-// type TuplePermissions = [UserPermissions, UserPermissions];
+type TuplePermissions = [UserPermissions, UserPermissions];
 
-// type BasicUser<A = boolean, P = TuplePermissions> = {
-//   name: string;
-//   surname: string;
-//   age: number;
-//   isAdmin: A;
-//   permissions?: P;
-// };
+type BasicUser<A = boolean, P = TuplePermissions> = {
+  // readonly name: string; //* You can't change this
+  name: string;
+  surname: string;
+  age: number;
+  isAdmin: A;
+  permissions?: P;
+};
 
-// type BasicUserWithoutPermissions = Omit<BasicUser, "permissions">;
+type BasicUserWithoutPermissions = Omit<BasicUser, "permissions">; //* without permissions
 
-// type AdvancedUser = {
-//   account: number;
-// };
+type AdvancedUser = {
+  account: number;
+};
 
-// type FullUser<A = boolean, P = string[]> = BasicUser<A, P> & AdvancedUser;
+type FullUser<A = boolean, P = string[]> = BasicUser<A, P> & AdvancedUser;
 
-// type BasicUserReadonly = Readonly<BasicUser>;
-// type BasicUserRequired = Required<BasicUser>;
-// type BasicUserPartial = Partial<BasicUser>;
+type BasicUserReadonly = Readonly<BasicUser>; //* every item is mark as readonly
+type BasicUserRequired = Required<BasicUser>; //* every item is mark as required
+type BasicUserPartial = Partial<BasicUser>; //* every item is mark as not required ( item? : string | undefined)
 
-// type BasicUserReadonlyRequired = Readonly<Required<BasicUser>>;
+type BasicUserReadonlyRequired = Readonly<Required<BasicUser>>;
 
-// const user: FullUser<boolean> = {
-//   name: "Nick",
-//   surname: "Ovchinnikov",
-//   age: 30,
-//   isAdmin: true,
-//   account: 100,
-//   permissions: ["admin", "user"],
-// };
+const user: FullUser<boolean> = {
+  name: "Nick",
+  surname: "Ovchinnikov",
+  age: 30,
+  isAdmin: true,
+  account: 100,
+  permissions: ["admin", "user"],
+};
 
-// user.name = "Test";
+user.name = "Test"; //* can't be mark as readonly!
 
-// const usersArray: FullUser[] = [user, user];
+const usersArray: FullUser[] = [user, user];
 
-// function getFirst<T>(arr: T[]): T {
-//   return arr[0];
-// }
+function getFirst<T>(arr: T[]): T {
+  return arr[0];
+}
 
-// type BasicFunction = () => FullUser[];
+type BasicFunction = () => FullUser[];
 
-// type getFirstReturnType = ReturnType<BasicFunction>;
+type getFirstReturnType = ReturnType<BasicFunction>;
 
-// getFirst<FullUser>(usersArray);
+getFirst<FullUser>(usersArray);
 
-// type MathFunc<T = number> = (a: T, b: T) => T;
+type MathFunc<T = number> = (a: T, b: T) => T;
 
-// const mul: MathFunc = (a, b) => a * b;
+const mul: MathFunc = (a, b) => a * b;
 
-// const add: MathFunc = (a, b) => a + b;
+const add: MathFunc = (a, b) => a + b;
 
-// console.log("mul(4,5):", mul(4, 5));
-// console.log("add(4,5):", add(4, 5));
+console.log("mul(4,5):", mul(4, 5));
+console.log("add(4,5):", add(4, 5));
