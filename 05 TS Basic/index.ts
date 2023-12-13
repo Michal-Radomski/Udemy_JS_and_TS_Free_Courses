@@ -1,70 +1,89 @@
-type UserPermissions = "admin" | "user" | "manager";
+//@ -> 1
+// type UserPermissions = "admin" | "user" | "manager";
 
-interface BasicUser<A = boolean> {
-  name: string;
-  surname: string;
-  age: number;
-  // isAdmin: boolean;
-  isAdmin: A;
-}
+// interface BasicUser<A = boolean> {
+//   name: string;
+//   surname: string;
+//   age: number;
+//   // isAdmin: boolean;
+//   isAdmin: A;
+// }
 
-//* Merging - don't do it!
-// interface BasicUser {
+// //* Merging - don't do it!
+// // interface BasicUser {
+// //   account: number;
+// // }
+
+// interface AdvancedUser {
 //   account: number;
 // }
 
-interface AdvancedUser {
-  account: number;
-}
+// type FullUser = BasicUser & AdvancedUser;
 
-type FullUser = BasicUser & AdvancedUser;
+// const basicUser: BasicUser<boolean> = {
+//   name: "Nick",
+//   surname: "Ovchinnikov",
+//   age: 30,
+//   isAdmin: true,
+//   // account: 30,
+// };
+// console.log("basicUser:", basicUser);
 
-const basicUser: BasicUser<boolean> = {
-  name: "Nick",
-  surname: "Ovchinnikov",
-  age: 30,
-  isAdmin: true,
-  // account: 30,
+// interface UserWithPermissions extends BasicUser<boolean> {
+//   permissions?: UserPermissions;
+// }
+
+// const userWithPermissions: UserWithPermissions = {
+//   name: "Nick",
+//   surname: "Ovchinnikov",
+//   age: 30,
+//   isAdmin: true,
+//   permissions: "admin",
+//   // account: 50,
+// };
+// console.log("userWithPermissions:", userWithPermissions);
+
+// const fullUser: FullUser = {
+//   name: "Nick",
+//   surname: "Ovchinnikov",
+//   age: 30,
+//   isAdmin: true,
+//   account: 50,
+// };
+// console.log("fullUser:", fullUser);
+
+// type MathFunc = (a: number, b: number) => number;
+// // type MathFunc<T = number> = (a: T, b: T) => T;
+// const mul: MathFunc = (a, b) => a * b;
+// const add: MathFunc = (a, b) => a + b;
+// console.log("mul(4,5):", mul(4, 5));
+// console.log("add(4,5):", add(4, 5));
+
+// //* Generics
+// const usersArray: BasicUser[] = [basicUser, basicUser, basicUser];
+// function getFirst<T>(arr: T[]): T {
+//   return arr[0];
+// }
+// console.log("getFirst<BasicUser>(usersArray):", getFirst<BasicUser>(usersArray));
+
+//@ -> 2
+const logFunction = (data: unknown): void => {
+  console.log("data:", data);
+  // return data
+  return undefined;
 };
-console.log("basicUser:", basicUser);
 
-interface UserWithPermissions extends BasicUser<boolean> {
-  permissions?: UserPermissions;
-}
-
-const userWithPermissions: UserWithPermissions = {
-  name: "Nick",
-  surname: "Ovchinnikov",
-  age: 30,
-  isAdmin: true,
-  permissions: "admin",
-  // account: 50,
+const logFunction2 = (data: unknown): never => {
+  console.log("data:", data);
+  throw new Error("Bad");
 };
-console.log("userWithPermissions:", userWithPermissions);
 
-const fullUser: FullUser = {
-  name: "Nick",
-  surname: "Ovchinnikov",
-  age: 30,
-  isAdmin: true,
-  account: 50,
-};
-console.log("fullUser:", fullUser);
+type UserPermissions = "admin" | "user" | "manager";
+type TuplePermissions = [UserPermissions, number];
+const permissions: TuplePermissions = ["admin", 5];
+console.log("permissions", permissions);
 
-type MathFunc = (a: number, b: number) => number;
-// type MathFunc<T = number> = (a: T, b: T) => T;
-const mul: MathFunc = (a, b) => a * b;
-const add: MathFunc = (a, b) => a + b;
-console.log("mul(4,5):", mul(4, 5));
-console.log("add(4,5):", add(4, 5));
-
-//* Generics
-const usersArray: BasicUser[] = [basicUser, basicUser, basicUser];
-function getFirst<T>(arr: T[]): T {
-  return arr[0];
-}
-console.log("getFirst<BasicUser>(usersArray):", getFirst<BasicUser>(usersArray));
-
+//@ -> 3
 // type UserPermissions = "admin" | "user" | "manager";
 
 // type PermissionsWithoutAdmin = Exclude<UserPermissions, "admin">;
